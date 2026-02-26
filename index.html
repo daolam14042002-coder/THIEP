@@ -2,51 +2,66 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thiệp Mời Online</title>
 <style>
-/* Reset */
-body, html { margin:0; padding:0; height:100%; font-family: Arial, sans-serif; background:#f5f5f5; }
-
-/* Container dọc */
-#cover, #content {
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100%;
-  max-width: 1080px; /* giữ dọc chuẩn */
-  margin: 0 auto; /* căn giữa desktop */
+  overflow: hidden;
 }
 
-/* Ẩn content lúc đầu */
-#content { display: none; }
+/* Frame chính */
+.frame {
+  position: relative;
+  width: 100%;
+  max-width: 1080px; /* ảnh dọc chuẩn desktop/mobile lớn nhất */
+}
 
-/* Hình responsive */
-img {
-  max-width: 100%;
-  height: auto;
-  cursor: pointer; /* khi hover / tap → thấy có thể click */
+/* Screen overlay */
+.screen {
+  position: relative;
+  width: 100%;
+}
+
+/* Ẩn nội dung lúc đầu */
+#content {
+  display: none;
+}
+
+/* Ảnh full theo chiều cao, giữ tỉ lệ gốc dọc */
+.screen img {
+  width: auto;       /* width auto để giữ tỉ lệ */
+  height: 100vh;     /* full chiều cao màn hình */
+  max-width: 100%;   /* không vượt quá frame */
+  display: block;
+  cursor: pointer;
+  margin: 0 auto;    /* căn giữa horizontal */
 }
 </style>
 </head>
-
 <body>
 
-<!-- BÌA (toàn bộ ảnh click được) -->
-<div id="cover" onclick="openInvitation()">
-  <img src="https://i.postimg.cc/cLw4Jtym/COVER.png" alt="Bìa thiệp">
-</div>
+<div class="frame">
+  <div id="cover" class="screen" onclick="openInvitation()">
+    <img src="https://i.postimg.cc/SxgMpQ3R/COVER.jpg" alt="Cover">
+  </div>
 
-<!-- NỘI DUNG -->
-<div id="content">
-  <img src="" alt="Nội dung thiệp">
+  <div id="content" class="screen">
+    <img src="https://i.postimg.cc/YOUR-CONTENT.png" alt="Content">
+  </div>
 </div>
 
 <script>
 function openInvitation(){
-  document.getElementById("cover").style.display = "none";
-  document.getElementById("content").style.display = "flex";
+  document.getElementById("cover").style.display="none";
+  document.getElementById("content").style.display="block";
 }
 </script>
 
